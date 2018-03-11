@@ -1,21 +1,23 @@
 # StrongHandlersExample
 
-**TODO: Add description**
+Application that demonstrates the following problem:
 
-## Installation
+If event handlers with `:strong` consistency run on multiple nodes, a command
+dispatch with `:strong` consistency will timeout. The behaviour seems to be that
+whatever the first subscription is will ack the caller, and event handlers
+running on the same node as that first one will ack, but any running on a
+separate node never do.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `strong_handlers_example` to your list of dependencies in `mix.exs`:
+## How to use
 
-```elixir
-def deps do
-  [
-    {:strong_handlers_example, "~> 0.1.0"}
-  ]
-end
 ```
+$ ./start_node1
+$ ./start_node2
+$ ./start_node3
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/strong_handlers_example](https://hexdocs.pm/strong_handlers_example).
+# Should distribute event handlers between the nodes. Check the subscriptions to
+# make sure they didn't start all on the same nodes, otherwise you won't be able
+# to replicate the problem.
 
+iex(node1@127.0.0.1)1> StrongHandlersExample.run_strong_cmd()
+```

@@ -24,7 +24,8 @@ defmodule StrongHandlersExample.MixProject do
        github: "commanded/commanded-eventstore-adapter", override: true},
       {:commanded_swarm_registry, git: "https://github.com/commanded/commanded-swarm-registry.git"},
       {:eventstore, github: "commanded/eventstore", override: true},
-      {:phoenix_pubsub, "~> 1.0"}
+      {:phoenix_pubsub, "~> 1.0"},
+      {:libcluster, "~> 2.1"}
     ]
   end
 end
