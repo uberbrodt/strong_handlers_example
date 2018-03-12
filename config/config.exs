@@ -6,6 +6,8 @@ config :commanded,
   registry: Commanded.Registration.SwarmRegistry,
   event_store_adapter: Commanded.EventStore.Adapters.EventStore
 
+config :eventstore, registry: :distributed
+
 config :eventstore, EventStore.Storage,
   serializer: Commanded.Serialization.JsonSerializer,
   username: "cbrodt",
